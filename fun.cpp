@@ -189,6 +189,8 @@ void Calculate(string choice)
 	/***************** 输入渠道 ******************/
 	cout << "从文件导入(floors.txt)吗？ y/n" << endl;
 	char file;
+	while (getchar() != '\n')
+		; // 删除之前的回车
 	file = getchar();
 	ifstream fin;
 
