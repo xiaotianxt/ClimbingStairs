@@ -7,12 +7,6 @@
 
 using namespace std;
 
-BigInteger fun()
-{
-	BigInteger a = 1, b = 1;
-	return a = a + b;
-}
-
 int main()
 {
 	Initialize();
