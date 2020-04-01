@@ -1,60 +1,60 @@
 #include "fun.h"
 
-BigInteger RecursionStart(int& floor)
+BigInteger RecursionStart(int &floor)
 {
 	int counter = 0;
 
-	if (memory.back() == 0) // Èç¹û×îºóÒ»Î»ÊÇ0
-		while (memory[counter++] != 0); // Ê×ÏÈÕÒµ½µÚÒ»¸öÎªÁãµÄÖµ
+	if (memory.back() == 0) // å¦‚æœæœ€åä¸€ä½æ˜¯0
+		while (memory[counter++] != 0)
+			; // é¦–å…ˆæ‰¾åˆ°ç¬¬ä¸€ä¸ªä¸ºé›¶çš„å€¼
 
-	if (counter - 2 > floor) // Èç¹ûÖ®Ç°ÒÑ¾­¸ã¶¨ÁË
+	if (counter - 2 > floor) // å¦‚æœä¹‹å‰å·²ç»æå®šäº†
 		return Recursion(floor, floor);
 
-	for (int temp_floor = counter - 2 + MAX_STACK; temp_floor < floor; temp_floor += MAX_STACK) // Ã¿´Îµİ¹éËÑË÷²ãÊı²»ÄÜ´óÓÚ5000
+	for (int temp_floor = counter - 2 + MAX_STACK; temp_floor < floor; temp_floor += MAX_STACK) // æ¯æ¬¡é€’å½’æœç´¢å±‚æ•°ä¸èƒ½å¤§äº5000
 	{
-			Recursion(temp_floor, temp_floor);
+		Recursion(temp_floor, temp_floor);
 	}
 
-	// ´ËÊ±ÒÑ¾­¿ÉÒÔÖ±½Ó´Ófloorµİ¹é
+	// æ­¤æ—¶å·²ç»å¯ä»¥ç›´æ¥ä»flooré€’å½’
 	Recursion(floor, floor);
-	
 
 	return memory[floor];
 }
 
-BigInteger Recursion(int& floor, int current)
+BigInteger Recursion(int &floor, int current)
 {
-	if (current == -1) // ´ËÊ±Ô½½ç·µ»Ø0
+	if (current == -1) // æ­¤æ—¶è¶Šç•Œè¿”å›0
 	{
 		return 0;
 	}
-	else if (current == 0) // ´ËÊ±½áÊø·µ»Ø1
+	else if (current == 0) // æ­¤æ—¶ç»“æŸè¿”å›1
 	{
-		assert(memory[0] == 1); // memoryµÄµÚÒ»¸öÓ¦µ±ÊÇ1£¬µÚ¶ş¸öÒ²Ó¦µ±ÊÇ1
+		assert(memory[0] == 1); // memoryçš„ç¬¬ä¸€ä¸ªåº”å½“æ˜¯1ï¼Œç¬¬äºŒä¸ªä¹Ÿåº”å½“æ˜¯1
 		return memory[0];
 	}
 	else
 	{
-		if (memory[current] != 0) // Èç¹ûÒÑ¾­ÓĞÖµÁË
-			return memory[current]; // Ö±½Ó¾Í¿ÉÒÔ·µ»Ø
-		else // ·ñÔòĞèÒªµİ¹éÑ°ÕÒÉÏÒ»¸öÖµ
+		if (memory[current] != 0)	// å¦‚æœå·²ç»æœ‰å€¼äº†
+			return memory[current]; // ç›´æ¥å°±å¯ä»¥è¿”å›
+		else						// å¦åˆ™éœ€è¦é€’å½’å¯»æ‰¾ä¸Šä¸€ä¸ªå€¼
 		{
-			return memory[current] = \
-				Recursion(floor, current - 1) + Recursion(floor, current - 2);
+			return memory[current] =
+					   Recursion(floor, current - 1) + Recursion(floor, current - 2);
 		}
 	}
 }
 
 BigInteger NotRecur(int floor)
 {
-	if (memory[floor] != 0) // Èç¹ûÒÑ¾­ÓĞ½á¹ûÁË¾ÍÖ±½Ó·µ»Ø
+	if (memory[floor] != 0) // å¦‚æœå·²ç»æœ‰ç»“æœäº†å°±ç›´æ¥è¿”å›
 	{
 		return memory[floor];
 	}
 
-	for (int i = 2; i <= floor; i++) // ×¢ÒâµÚfloor²ãµÄË÷Òı¾ÍÊÇfloor
+	for (int i = 2; i <= floor; i++) // æ³¨æ„ç¬¬floorå±‚çš„ç´¢å¼•å°±æ˜¯floor
 	{
-		if (memory[i] != 0) // Èç¹ûÒÑ¾­¼ÆËã¹ıÁË¾ÍÌø¹ı
+		if (memory[i] != 0) // å¦‚æœå·²ç»è®¡ç®—è¿‡äº†å°±è·³è¿‡
 		{
 			continue;
 		}
@@ -67,20 +67,20 @@ BigInteger NotRecur(int floor)
 	return memory[floor];
 }
 
-bool isInteger(string* judge)
+bool isInteger(string *judge)
 {
-	if ((*judge)[0] == '-' && (*judge).length() > 1) // Èç¹û³¤¶È´óÓÚ1£¬ÇÒÊÇ¸ºÊı
+	if ((*judge)[0] == '-' && (*judge).length() > 1) // å¦‚æœé•¿åº¦å¤§äº1ï¼Œä¸”æ˜¯è´Ÿæ•°
 	{
-		for (int i = 1; i < (*judge).length(); i++) // ´ÓµÚ2¸ö×Ö·û¿ªÊ¼ÅĞ¶ÏÊÇ·ñÊÇÕûÊı
+		for (int i = 1; i < (*judge).length(); i++) // ä»ç¬¬2ä¸ªå­—ç¬¦å¼€å§‹åˆ¤æ–­æ˜¯å¦æ˜¯æ•´æ•°
 		{
 			if ((*judge)[i] > '9' || (*judge)[i] < '0')
 				return false;
 		}
 	}
-	else // ·ñÔòÖ»¿ÉÄÜÊÇÕıÊı
+	else // å¦åˆ™åªå¯èƒ½æ˜¯æ­£æ•°
 	{
 
-		for (int i = 0; i < (*judge).length(); i++) // ´ÓµÚ0¸ö¿ªÊ¼
+		for (int i = 0; i < (*judge).length(); i++) // ä»ç¬¬0ä¸ªå¼€å§‹
 		{
 			if ((*judge)[i] > '9' || (*judge)[i] < '0')
 				return false;
@@ -93,49 +93,49 @@ void MemoryReset()
 {
 	vector<BigInteger> new_memory;
 	new_memory.push_back(1);
-	new_memory.push_back(1); // ³õÊ¼»¯
-	memory.clear();				// Çå¿Õmemory
-	memory.swap(new_memory); // ¸üĞÂmemory
+	new_memory.push_back(1); // åˆå§‹åŒ–
+	memory.clear();			 // æ¸…ç©ºmemory
+	memory.swap(new_memory); // æ›´æ–°memory
 }
 
 void MemoryInit(int &max_floor)
 {
-	while ((max_floor + 1) > memory.size()) // µÚ¶ş²ãµ½input²ã¶¼¸³³õÖµ0
+	while ((max_floor + 1) > memory.size()) // ç¬¬äºŒå±‚åˆ°inputå±‚éƒ½èµ‹åˆå€¼0
 	{
-		memory.push_back(0); // vector²»¹»Ê±³õÊ¼»¯
+		memory.push_back(0); // vectorä¸å¤Ÿæ—¶åˆå§‹åŒ–
 	}
 }
 
 void Initialize()
 
-
 {
-	memory.push_back(1); // ²ãÊıÎª0µÄ·½·¨ÓĞ1ÖÖ
-	memory.push_back(1); // ²ãÊıÎª1µÄ·½·¨ÓĞ1ÖÖ
+	memory.push_back(1); // å±‚æ•°ä¸º0çš„æ–¹æ³•æœ‰1ç§
+	memory.push_back(1); // å±‚æ•°ä¸º1çš„æ–¹æ³•æœ‰1ç§
 	clock_t start1, start2, end1, end2;
 	string choice, temp;
 	int input = 0;
 
-	/***************** Ñ¡ÔñÄ£Ê½ ******************/
-	cout << "Ö§³Öµİ¹é(A)Óë·Çµİ¹é(B)·½·¨ÊµÏÖ£¬ÒÔ¼°²âÊÔÄ£Ê½(C, °üº¬Ê±¼ä²âÊÔ£¬)" << endl;
-	cout << "ÇëÊäÈëÄãµÄÑ¡Ôñ£¡ A/B/C" << endl;
+	/***************** é€‰æ‹©æ¨¡å¼ ******************/
+	cout << "æ”¯æŒé€’å½’(A)ä¸éé€’å½’(B)æ–¹æ³•å®ç°ï¼Œä»¥åŠæµ‹è¯•æ¨¡å¼(C, åŒ…å«æ—¶é—´æµ‹è¯•ï¼Œ)" << endl;
+	cout << "è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼ A/B/C" << endl;
 	cin >> choice;
 	while (cin.fail() || (choice != "A" && choice != "B" && choice != "C"))
 	{
 		cin.sync();
-		cout << "ÊäÈë´íÎó£¡ÇëÖØĞÂÊäÈë£¡ A/B/C\n";
+		cout << "è¾“å…¥é”™è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼ A/B/C\n";
 		cin >> choice;
 	}
-	while (getchar() != '\n'); // Çå³ı¿Õ¸ñ
+	while (getchar() != '\n')
+		; // æ¸…é™¤ç©ºæ ¼
 
-	/***************** ²âÊÔÄ£Ê½ ******************/
-	if (choice == "C") // Èç¹ûÑ¡Ôñ²âÊÔÄ£Ê½£¬×Ô¶¯ÔËËã¡¢×Ô¶¯¼ÆÊ±¡¢ÎŞĞèÊäÈë
+	/***************** æµ‹è¯•æ¨¡å¼ ******************/
+	if (choice == "C") // å¦‚æœé€‰æ‹©æµ‹è¯•æ¨¡å¼ï¼Œè‡ªåŠ¨è¿ç®—ã€è‡ªåŠ¨è®¡æ—¶ã€æ— éœ€è¾“å…¥
 	{
 		TestMode();
 		return;
 	}
 
-	/***************** ÊäÈë²ãÊı£¨¿ÉÑ­»·£© ******************/
+	/***************** è¾“å…¥å±‚æ•°ï¼ˆå¯å¾ªç¯ï¼‰ ******************/
 	Calculate(choice);
 }
 
@@ -143,39 +143,39 @@ void TestMode()
 {
 	clock_t start1, end1, start2, end2;
 	cout << "------------------------------------" << endl;
-	cout << setiosflags(ios::left) << setw(14) << "Floor" << resetiosflags(ios::left) // ÓÃÍêÖ®ºóÇå³ı
-		<< setiosflags(ios::right) << setw(9) << "µİ¹é" << setw(12) << "·Çµİ¹é"
-		<< resetiosflags(ios::right) << endl;
+	cout << setiosflags(ios::left) << setw(14) << "Floor" << resetiosflags(ios::left) // ç”¨å®Œä¹‹åæ¸…é™¤
+		 << setiosflags(ios::right) << setw(9) << "é€’å½’" << setw(12) << "éé€’å½’"
+		 << resetiosflags(ios::right) << endl;
 	cout << "------------------------------------" << endl;
-	for (int i = 0; i < 5; ++i) {
-
+	for (int i = 0; i < 5; ++i)
+	{
 	}
 	MemoryReset();
-	assert(memory.size() == 2); // ´ËÊ±¼ÇÒäÓ¦µ±Çå¿Õ£¬½ö´æÔÚ³õÊ¼Ìõ¼ş0,1
-	int max_floor = 100, x = 0, y = 0; // x, y ÓÃÓÚÉèÖÃ¿ØÖÆÌ¨¹â±ê
+	assert(memory.size() == 2);		   // æ­¤æ—¶è®°å¿†åº”å½“æ¸…ç©ºï¼Œä»…å­˜åœ¨åˆå§‹æ¡ä»¶0,1
+	int max_floor = 100, x = 0, y = 0; // x, y ç”¨äºè®¾ç½®æ§åˆ¶å°å…‰æ ‡
 	while (max_floor != 0)
 	{
 		MemoryInit(max_floor);
-		/***************** µİ¹é·¨ ******************/
+		/***************** é€’å½’æ³• ******************/
 		start1 = clock();
 		RecursionStart(max_floor);
 		end1 = clock();
 
-		/***************** ·Çµİ¹é ******************/
-		MemoryReset(); // Çå¿ÕÄÚ´æÖØĞÂ¼ÆËã
+		/***************** éé€’å½’ ******************/
+		MemoryReset(); // æ¸…ç©ºå†…å­˜é‡æ–°è®¡ç®—
 		MemoryInit(max_floor);
 		start2 = clock();
 		NotRecur(max_floor);
 		end2 = clock();
-		MemoryReset(); // Çå¿ÕÄÚ´æÖØĞÂ¼ÆËã
+		MemoryReset(); // æ¸…ç©ºå†…å­˜é‡æ–°è®¡ç®—
 
 		cout << setiosflags(ios::left) << setiosflags(ios::scientific) << setw(14) << max_floor << resetiosflags(ios::left) << resetiosflags(ios::scientific) << setiosflags(ios::fixed) << setprecision(0)
-			<< setiosflags(ios::right) << setw(9) << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << "ms" << setw(10) << (double)(end2 - start2) * 1000 / CLOCKS_PER_SEC << "ms"
-			<< resetiosflags(ios::right) << endl;
+			 << setiosflags(ios::right) << setw(9) << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << "ms" << setw(10) << (double)(end2 - start2) * 1000 / CLOCKS_PER_SEC << "ms"
+			 << resetiosflags(ios::right) << endl;
 		cin.sync();
 		cin.clear();
 		cin.ignore();
-		cout << "ÊäÈënÍË³ö£¬ÈÎÒâ¼ü¼ÌĞø" << endl;
+		cout << "è¾“å…¥né€€å‡ºï¼Œä»»æ„é”®ç»§ç»­" << endl;
 		char ch;
 		ch = getch();
 		if (ch == 'n')
@@ -193,8 +193,8 @@ void TestMode()
 
 void Calculate(string choice)
 {
-	/***************** ÊäÈëÇşµÀ ******************/
-	cout << "´ÓÎÄ¼şµ¼Èë(floors.txt)Âğ£¿ y/n" << endl;
+	/***************** è¾“å…¥æ¸ é“ ******************/
+	cout << "ä»æ–‡ä»¶å¯¼å…¥(floors.txt)å—ï¼Ÿ y/n" << endl;
 	char file;
 	file = getchar();
 	ifstream fin;
@@ -206,82 +206,85 @@ void Calculate(string choice)
 	clock_t start1, end1;
 	string temp;
 	int input;
-	do { // Ñ­»·»ñµÃÊäÈë£¬Ö±µ½ÊäÈë-1
-		if (file == 'y') // ´ÓÎÄ¼şÖĞ»ñÈ¡ÊäÈë
+	do
+	{					 // å¾ªç¯è·å¾—è¾“å…¥ï¼Œç›´åˆ°è¾“å…¥-1
+		if (file == 'y') // ä»æ–‡ä»¶ä¸­è·å–è¾“å…¥
 		{
 			fin >> temp;
 			while (!isInteger(&temp) || fin.fail() || atoi(temp.c_str()) < 0)
-				// ÅÅ´í:1. ²»ÊÇÕûÊı 2. ÊäÈë´íÎó 3. ·¶Î§´íÎó
+			// æ’é”™:1. ä¸æ˜¯æ•´æ•° 2. è¾“å…¥é”™è¯¯ 3. èŒƒå›´é”™è¯¯
 			{
-				cout << temp << "²»ÊÇ´óÓÚ1µÄÕûÊı£¬Çë¼ì²éÎÄ¼ş¸ñÊ½£¡£¡£¡\n" << endl;
+				cout << temp << "ä¸æ˜¯å¤§äº1çš„æ•´æ•°ï¼Œè¯·æ£€æŸ¥æ–‡ä»¶æ ¼å¼ï¼ï¼ï¼\n"
+					 << endl;
 				fflush(stdin);
 				fin.clear();
 				fin.ignore(INT_MAX, '\n');
 				fin >> temp;
 			}
 		}
-		else // ´Ó¿ØÖÆÌ¨»ñÈ¡ÊäÈë
+		else // ä»æ§åˆ¶å°è·å–è¾“å…¥
 		{
-			cout << "\nÇëÊäÈë²ãÊı£¬-1»Øµ½ÉÏ²ã£¬0ÍË³ö£º" << endl; // ÆäÊµ0¿ÉÒÔ·µ»Ø1£¬µ«ÊÇÃ»ÓĞÒâÒå£¬Òò´ËÕâÀïÖ±½ÓÁî0Îª·µ»ØÉÏ²ã²Ëµ¥
+			cout << "\nè¯·è¾“å…¥å±‚æ•°ï¼Œ-1å›åˆ°ä¸Šå±‚ï¼Œ0é€€å‡ºï¼š" << endl; // å…¶å®0å¯ä»¥è¿”å›1ï¼Œä½†æ˜¯æ²¡æœ‰æ„ä¹‰ï¼Œå› æ­¤è¿™é‡Œç›´æ¥ä»¤0ä¸ºè¿”å›ä¸Šå±‚èœå•
 			cin >> temp;
 			while (!isInteger(&temp) || cin.fail() || atoi(temp.c_str()) < -1)
-				// ÅÅ´í:1. ²»ÊÇÕûÊı 2. ÊäÈë´íÎó 3. ·¶Î§´íÎó
+			// æ’é”™:1. ä¸æ˜¯æ•´æ•° 2. è¾“å…¥é”™è¯¯ 3. èŒƒå›´é”™è¯¯
 			{
 				fflush(stdin);
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
-				cout << "ÇëÊäÈëÕıÈ·µÄ²ãÊı£¡£¡\n";
+				cout << "è¯·è¾“å…¥æ­£ç¡®çš„å±‚æ•°ï¼ï¼\n";
 				cin >> temp;
 			}
 		}
 
-		/***************** ½öÎª³¬³¤ÕûÊıµÄÌá¹©Ëã·¨ ******************/
-		if (temp.length() > FLOOR_LENGTH_LIMMIT) // Èç¹û³¬¹ı8Î»£¬Ö»ÄÜÓÃ·Çµİ¹éËã·¨
+		/***************** ä»…ä¸ºè¶…é•¿æ•´æ•°çš„æä¾›ç®—æ³• ******************/
+		if (temp.length() > FLOOR_LENGTH_LIMMIT) // å¦‚æœè¶…è¿‡8ä½ï¼Œåªèƒ½ç”¨éé€’å½’ç®—æ³•
 		{
-			cout << "ÊıÌ«´óÁË£¬ÈÃÎÒËãËã" << endl;
+			cout << "æ•°å¤ªå¤§äº†ï¼Œè®©æˆ‘ç®—ç®—" << endl;
 			BigInteger longinput;
 			longinput = temp;
 			start1 = clock();
 			cout << NotRecurBig(longinput) << endl;
 			end1 = clock();
-			cout << "ÓÃÊ±£º \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n" << endl;
+			cout << "ç”¨æ—¶ï¼š \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n"
+				 << endl;
 			continue;
 		}
 
-
-		input = atoi(temp.c_str()); // ×Ö·û´® -> ÕûÊı
+		input = atoi(temp.c_str()); // å­—ç¬¦ä¸² -> æ•´æ•°
 		if (input == 0)
 		{
-			return; // Ö±½ÓÍË³ö
+			return; // ç›´æ¥é€€å‡º
 		}
 
-		else if (input == -1) // ¸ü»»Ä£Ê½
+		else if (input == -1) // æ›´æ¢æ¨¡å¼
 		{
-			Initialize(); // ÖØĞÂÔËĞĞ£¬ÕâÑùµÄÈ±µãÊÇ¶àÒ»²ã£¬µ«Ó°Ïì²»´ó
+			Initialize(); // é‡æ–°è¿è¡Œï¼Œè¿™æ ·çš„ç¼ºç‚¹æ˜¯å¤šä¸€å±‚ï¼Œä½†å½±å“ä¸å¤§
 			return;
 		}
 
-		/***************** memory³õÊ¼»¯ ******************/
+		/***************** memoryåˆå§‹åŒ– ******************/
 		MemoryInit(input);
 
-
-		/***************** ÊµÏÖ×ßÂ¥Ìİ ******************/
-		if ("A" == choice) // ×ßµİ¹é
+		/***************** å®ç°èµ°æ¥¼æ¢¯ ******************/
+		if ("A" == choice) // èµ°é€’å½’
 		{
 			start1 = clock();
 			cout << input << ": \t" << RecursionStart(input) << '\t';
 			end1 = clock();
-			cout << "ÓÃÊ±£º \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n" << endl;
+			cout << "ç”¨æ—¶ï¼š \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n"
+				 << endl;
 		}
-		else if ("B" == choice) // ²»×ßµİ¹é
+		else if ("B" == choice) // ä¸èµ°é€’å½’
 		{
 			start1 = clock();
 			cout << input << ": \t" << NotRecur(input) << '\t';
 			end1 = clock();
-			cout << "ÓÃÊ±£º \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n" << endl;
+			cout << "ç”¨æ—¶ï¼š \t" << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << " ms\n"
+				 << endl;
 		}
 
-		/***************** ÏÂÒ»¸öÊı ******************/
+		/***************** ä¸‹ä¸€ä¸ªæ•° ******************/
 	} while (true);
 	return;
 }
@@ -290,15 +293,15 @@ BigInteger NotRecurBig(BigInteger input)
 {
 	BigInteger i, a, b;
 	i = 2;
-	a = 1; // ÆæÊı
-	b = 2; // Å¼Êı
-	for (; i < input; i+=2)
+	a = 1; // å¥‡æ•°
+	b = 2; // å¶æ•°
+	for (; i < input; i += 2)
 	{
 		a = (a + b);
 		b = (a + b);
 	}
 
-	if (input % 2 == 1) // Èç¹ûÊÇÆæÊı
+	if (input % 2 == 1) // å¦‚æœæ˜¯å¥‡æ•°
 	{
 		return a;
 	}
@@ -306,5 +309,4 @@ BigInteger NotRecurBig(BigInteger input)
 	{
 		return b;
 	}
-
 }

@@ -3,81 +3,81 @@
 
 using namespace std;
 
-const int MAX_STACK = 5000; // ¶¨Òå×î´ó¶ÑÕ»ÄÜ³ĞÊÜ²ãÊı£¨Óëvisual studioÅäÖÃÓĞ¹Ø£©
-const int FLOOR_LENGTH_LIMMIT = 8; // ¶¨ÒåÒ»°ãËã·¨½ÓÊÜµÄ×î´óÕûÊıÎ»Êı
+const int MAX_STACK = 5000;		   // å®šä¹‰æœ€å¤§å †æ ˆèƒ½æ‰¿å—å±‚æ•°ï¼ˆä¸visual studioé…ç½®æœ‰å…³ï¼‰
+const int FLOOR_LENGTH_LIMMIT = 8; // å®šä¹‰ä¸€èˆ¬ç®—æ³•æ¥å—çš„æœ€å¤§æ•´æ•°ä½æ•°
 
-static vector<BigInteger> memory; // ¸ºÔğ±£´æÖĞ¼ä½á¹ûÒÔ¹©ÆäËûÊ±¼äÊ¹ÓÃ
+static vector<BigInteger> memory; // è´Ÿè´£ä¿å­˜ä¸­é—´ç»“æœä»¥ä¾›å…¶ä»–æ—¶é—´ä½¿ç”¨
 
 /*********************************
-* Ãû³Æ£º		RecursionStart
-* ÃèÊö£º		ÓÃÓÚ³õÊ¼»¯µİ¹éËã·¨
+* åç§°ï¼š		RecursionStart
+* æè¿°ï¼š		ç”¨äºåˆå§‹åŒ–é€’å½’ç®—æ³•
 * 
-* ²ÎÊı£º		int& floor // ×î´ó²ãÊı
-* ·µ»ØÖµ£º	BigInteger // ·µ»Ø¼ÆËã½á¹û
+* å‚æ•°ï¼š		int& floor // æœ€å¤§å±‚æ•°
+* è¿”å›å€¼ï¼š	BigInteger // è¿”å›è®¡ç®—ç»“æœ
 *********************************/
-BigInteger RecursionStart(int& floor);
+BigInteger RecursionStart(int &floor);
 
 /*********************************
-* Ãû³Æ£º		Recursion
-* ÃèÊö£º		µİ¹éËã·¨
+* åç§°ï¼š		Recursion
+* æè¿°ï¼š		é€’å½’ç®—æ³•
 * 
-* ²ÎÊı£º		int& floor // ×î´ó²ãÊı
-			int current // µ±Ç°²ãÊı
-* ·µ»ØÖµ£º	BigInteger // ·µ»Ø¼ÆËã½á¹û
+* å‚æ•°ï¼š		int& floor // æœ€å¤§å±‚æ•°
+			int current // å½“å‰å±‚æ•°
+* è¿”å›å€¼ï¼š	BigInteger // è¿”å›è®¡ç®—ç»“æœ
 *********************************/
-BigInteger Recursion(int& floor, int current);
+BigInteger Recursion(int &floor, int current);
 
 /*********************************
-* Ãû³Æ£º		NotRecur
-* ÃèÊö£º		·Çµİ¹éÊµÏÖ¼ÆËã
+* åç§°ï¼š		NotRecur
+* æè¿°ï¼š		éé€’å½’å®ç°è®¡ç®—
 * 
-* ²ÎÊı£º		int floor ×î´ó²ãÊı
-* ·µ»ØÖµ£º	BigInteger ·µ»Ø½á¹û
+* å‚æ•°ï¼š		int floor æœ€å¤§å±‚æ•°
+* è¿”å›å€¼ï¼š	BigInteger è¿”å›ç»“æœ
 *********************************/
 BigInteger NotRecur(int floor);
 
 /*********************************
-* Ãû³Æ£º		isInteger
-* ÃèÊö£º		ÓÃÓÚÅĞ¶ÏÊÇ·ñÊÇÕûÊı
+* åç§°ï¼š		isInteger
+* æè¿°ï¼š		ç”¨äºåˆ¤æ–­æ˜¯å¦æ˜¯æ•´æ•°
 * 
-* ²ÎÊı£º		string* judge // ´«Èë×Ö·û´®Ö¸Õë
-* ·µ»ØÖµ£º	bool // ÊÇ£ºtrue
+* å‚æ•°ï¼š		string* judge // ä¼ å…¥å­—ç¬¦ä¸²æŒ‡é’ˆ
+* è¿”å›å€¼ï¼š	bool // æ˜¯ï¼štrue
 *********************************/
-bool isInteger(string* judge);
+bool isInteger(string *judge);
 
 /*********************************
-* Ãû³Æ£º		MemoryReset
-* ÃèÊö£º		Çå³ımemoryÊı×é
+* åç§°ï¼š		MemoryReset
+* æè¿°ï¼š		æ¸…é™¤memoryæ•°ç»„
 * 
-* ²ÎÊı£º		None
-* ·µ»ØÖµ£º	None
+* å‚æ•°ï¼š		None
+* è¿”å›å€¼ï¼š	None
 *********************************/
 void MemoryReset();
 
 /*********************************
-* Ãû³Æ£º		MemoryInit
-* ÃèÊö£º		³õÊ¼»¯memoryÊı×é£¨Éè0
+* åç§°ï¼š		MemoryInit
+* æè¿°ï¼š		åˆå§‹åŒ–memoryæ•°ç»„ï¼ˆè®¾0
 * 
-* ²ÎÊı£º		int &max_floor // ×î´óÌ¨½×Êı
-* ·µ»ØÖµ£º	None
+* å‚æ•°ï¼š		int &max_floor // æœ€å¤§å°é˜¶æ•°
+* è¿”å›å€¼ï¼š	None
 *********************************/
 void MemoryInit(int &max_floor);
 
 /*********************************
-* Ãû³Æ£º		Initialize
-* ÃèÊö£º		³õÊ¼»¯£¬¿ªÊ¼µÄ¿ªÊ¼
+* åç§°ï¼š		Initialize
+* æè¿°ï¼š		åˆå§‹åŒ–ï¼Œå¼€å§‹çš„å¼€å§‹
 *
-* ²ÎÊı£º		None
-* ·µ»ØÖµ£º	None
+* å‚æ•°ï¼š		None
+* è¿”å›å€¼ï¼š	None
 *********************************/
 void Initialize();
 
 /*********************************
-* Ãû³Æ£º		TestMode
-* ÃèÊö£º		½øÈë²âÊÔÄ£Ê½
+* åç§°ï¼š		TestMode
+* æè¿°ï¼š		è¿›å…¥æµ‹è¯•æ¨¡å¼
 * 
-* ²ÎÊı£º		None
-* ·µ»ØÖµ£º	None
+* å‚æ•°ï¼š		None
+* è¿”å›å€¼ï¼š	None
 *********************************/
 void TestMode();
 

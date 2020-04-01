@@ -1,5 +1,5 @@
 #pragma once
-#pragma warning(disable:4996)
+#pragma warning(disable : 4996)
 #include <iostream>
 #include <algorithm>
 #include <vector>
@@ -16,100 +16,111 @@
 
 using namespace std;
 
-void gotoxy(int x, int y); //¸Ãº¯Êı¿ÉÉèÖÃ¹â±êµ½ÈÎÒâ×ø±ê
-void getxy(int* x, int* y); //¸Ãº¯Êı»ñÈ¡µ±Ç°¿ØÖÆÌ¨¹â±êÎ»ÖÃ
-
+void gotoxy(int x, int y);	//è¯¥å‡½æ•°å¯è®¾ç½®å…‰æ ‡åˆ°ä»»æ„åæ ‡
+void getxy(int *x, int *y); //è¯¥å‡½æ•°è·å–å½“å‰æ§åˆ¶å°å…‰æ ‡ä½ç½®
 
 class BigInteger
 {
 public:
-	static const int base = 100000000; // sÖĞÃ¿¸öÔªËØµÄ·¶Î§
-	static const int width = 8; // ÔªËØµÄ¿í¶È£¬Óëbase¶ÔÓ¦
-	vector<int>s;  // ´¢´æ´óÕûÊı
+	static const int base = 100000000; // sä¸­æ¯ä¸ªå…ƒç´ çš„èŒƒå›´
+	static const int width = 8;		   // å…ƒç´ çš„å®½åº¦ï¼Œä¸baseå¯¹åº”
+	vector<int> s;					   // å‚¨å­˜å¤§æ•´æ•°
 
-	BigInteger(long long num = 0) { *this = num; }    //¹¹Ôìº¯Êı£¬¶ÔÓÚlonglongÀàĞÍµÄÕûÊı¿ÉÒÔÖ±½Ó¹¹Ôì
+	BigInteger(long long num = 0) { *this = num; } //æ„é€ å‡½æ•°ï¼Œå¯¹äºlonglongç±»å‹çš„æ•´æ•°å¯ä»¥ç›´æ¥æ„é€ 
 
-	BigInteger operator=(long long num) // ÖØÔØ=ºÅ£¨×¢ÒâÕâÀïÖ»½ÓÊÜ×î´ólong longÀàĞÍµÄÕûÊı£©
+	BigInteger operator=(long long num) // é‡è½½=å·ï¼ˆæ³¨æ„è¿™é‡Œåªæ¥å—æœ€å¤§long longç±»å‹çš„æ•´æ•°ï¼‰
 	{
 		vector<int> news;
 		news.swap(s);
-		news.clear(); // Çå¿Õs£¬²¢Ïú»Ùs¶àÓàµÄÄÚ´æ¿Õ¼ä
+		news.clear(); // æ¸…ç©ºsï¼Œå¹¶é”€æ¯så¤šä½™çš„å†…å­˜ç©ºé—´
 
 		do
 		{
 			s.push_back(num % base);
 			num = num / base;
-		} while (num > 0); // ½«´óÊı°´ÕÕ8Î»»®·Öºó·ÅÈëÊı×é£¨µ¹Ğò£©
+		} while (num > 0); // å°†å¤§æ•°æŒ‰ç…§8ä½åˆ’åˆ†åæ”¾å…¥æ•°ç»„ï¼ˆå€’åºï¼‰
 
 		return *this;
 	}
 
-	BigInteger operator=(const string& str)      //ÖØÔØ=ºÅ £¨½ÓÊÜ×Ö·û´®ÀàĞÍµÄÕûÊı£©
+	BigInteger operator=(const string &str) //é‡è½½=å· ï¼ˆæ¥å—å­—ç¬¦ä¸²ç±»å‹çš„æ•´æ•°ï¼‰
 	{
 		s.clear();
-		int x, len = (str.length() - 1) / width + 1; // ·µ»Øº¯ÊıµÄ³¤¶È
+		int x, len = (str.length() - 1) / width + 1; // è¿”å›å‡½æ•°çš„é•¿åº¦
 		for (int i = 0; i < len; i++)
 		{
 			int end = str.length() - i * width;
-			int start = max(0, end - width); // ¶ÔÓÚ²»¹»8Î»µÄÑ¡Ôñ0£¬¹»8Î»µÄÑ¡Ôñend - width
-			s.push_back(stoi(str.substr(start, end - start)));  // ½«×Ö·û´®×ª»»ÎªÊı×Öºó×°Èës£¨µ¹Ğò£©
+			int start = max(0, end - width);				   // å¯¹äºä¸å¤Ÿ8ä½çš„é€‰æ‹©0ï¼Œå¤Ÿ8ä½çš„é€‰æ‹©end - width
+			s.push_back(stoi(str.substr(start, end - start))); // å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•°å­—åè£…å…¥sï¼ˆå€’åºï¼‰
 		}
 		return *this;
 	}
 
-	friend ostream& operator<<(ostream& out, const BigInteger& x)   //ÖØÔØÊä³öºÅ
+	friend ostream &operator<<(ostream &out, const BigInteger &x) //é‡è½½è¾“å‡ºå·
 	{
 		out << x.s.back();
 		for (int i = x.s.size() - 2; i >= 0; i--)
 		{
 			char buf[20];
 			sprintf(buf, "%08d", x.s[i]);
-			for (int j = 0; j<int(strlen(buf)); j++)
+			for (int j = 0; j < int(strlen(buf)); j++)
 				out << buf[j];
 		}
 		return out;
 	}
-	friend istream& operator>>(istream& in, BigInteger& x)   //ÖØÔØÊäÈëºÅ
+	friend istream &operator>>(istream &in, BigInteger &x) //é‡è½½è¾“å…¥å·
 	{
 		string s;
-		if (!(in >> s)) return in;
+		if (!(in >> s))
+			return in;
 		x = s;
 		return in;
 	}
-	BigInteger operator+(const BigInteger& b)const   //ÖØÔØ¼ÓºÅ
+	BigInteger operator+(const BigInteger &b) const //é‡è½½åŠ å·
 	{
 		BigInteger c;
 		c.s.clear();
-		for (int i = 0, g = 0;; i++) {
-			if (g == 0 && i >= s.size() && i >= b.s.size()) break;
+		for (int i = 0, g = 0;; i++)
+		{
+			if (g == 0 && i >= s.size() && i >= b.s.size())
+				break;
 			int x = g;
-			if (i < s.size()) x += s[i];
-			if (i < b.s.size()) x += b.s[i];
+			if (i < s.size())
+				x += s[i];
+			if (i < b.s.size())
+				x += b.s[i];
 			c.s.push_back(x % base);
 			g = x / base;
 		}
 		return c;
 	}
-	BigInteger operator-(const BigInteger& b)   //ÖØÔØ¼õºÅ,Ä¬ÈÏÇ°Ãæ´óÓÚºóÃæ
+	BigInteger operator-(const BigInteger &b) //é‡è½½å‡å·,é»˜è®¤å‰é¢å¤§äºåé¢
 	{
 		BigInteger c;
 		c.s.clear();
-		if (*this > b) {
+		if (*this > b)
+		{
 			int i, g;
-			for (i = 0, g = 0;; i++) {
-				if (g == 0 && i >= b.s.size()) break;
+			for (i = 0, g = 0;; i++)
+			{
+				if (g == 0 && i >= b.s.size())
+					break;
 				int x = g;
-				if (s[i] < b.s[i]) {
+				if (s[i] < b.s[i])
+				{
 					s[i + 1] -= 1;
 					s[i] = s[i] + base;
 				}
-				if (i < s.size()) x += s[i];
-				if (i < b.s.size()) x -= b.s[i];
+				if (i < s.size())
+					x += s[i];
+				if (i < b.s.size())
+					x -= b.s[i];
 				c.s.push_back(x % base);
 				g = x / base;
 			}
 			int x = 0;
-			for (; i < s.size(); i++) {
+			for (; i < s.size(); i++)
+			{
 				x += s[i];
 				c.s.push_back(x % base);
 				x = x / base;
@@ -117,66 +128,68 @@ public:
 		}
 		return c;
 	}
-	bool operator<(const BigInteger& b)const   //ÖØÔØĞ¡ÓÚºÅ
+	bool operator<(const BigInteger &b) const //é‡è½½å°äºå·
 	{
-		if (s.size() != b.s.size()) return s.size() < b.s.size();
+		if (s.size() != b.s.size())
+			return s.size() < b.s.size();
 		for (int i = s.size() - 1; i >= 0; i--)
-			if (s[i] != b.s[i]) return s[i] < b.s[i];
+			if (s[i] != b.s[i])
+				return s[i] < b.s[i];
 		return false;
 	}
-	bool operator>(const BigInteger& b)const   //ÖØÔØ´óÓÚºÅ
+	bool operator>(const BigInteger &b) const //é‡è½½å¤§äºå·
 	{
 		return b < *this;
 	}
-	bool operator<=(const BigInteger& b)const
+	bool operator<=(const BigInteger &b) const
 	{
 		return !(b < *this);
 	}
-	bool operator>=(const BigInteger& b)const
+	bool operator>=(const BigInteger &b) const
 	{
 		return !(*this < b);
 	}
-	bool operator==(const long long& b)const // ÖØÔØµÈÓÚ£¬ºÍÕûÊıÆ¥Åä
+	bool operator==(const long long &b) const // é‡è½½ç­‰äºï¼Œå’Œæ•´æ•°åŒ¹é…
 	{
-		return !(BigInteger(b) < *this) && !(*this < BigInteger(b)); // Èç¹ûĞ¡ÓÚ
+		return !(BigInteger(b) < *this) && !(*this < BigInteger(b)); // å¦‚æœå°äº
 	}
-	bool operator==(const BigInteger& b)const  //ÖØÔØµÈÓÚ£¬ºÍ´óÊıÀàĞÍÆ¥Åä
+	bool operator==(const BigInteger &b) const //é‡è½½ç­‰äºï¼Œå’Œå¤§æ•°ç±»å‹åŒ¹é…
 	{
 		return !(b < *this) && !(*this < b);
 	}
-	bool operator!=(const BigInteger& b)const // ÖØÔØ²»µÈÓÚ
+	bool operator!=(const BigInteger &b) const // é‡è½½ä¸ç­‰äº
 	{
-		return (b < *this) || (*this < b); // Ö»Òª´óÓÚ»òĞ¡ÓÚ¾ÍĞĞ
+		return (b < *this) || (*this < b); // åªè¦å¤§äºæˆ–å°äºå°±è¡Œ
 	}
-	bool operator!=(const long long& b)const
+	bool operator!=(const long long &b) const
 	{
 		return (BigInteger(b) < *this) || (*this < BigInteger(b));
 	}
-	BigInteger operator+=(const BigInteger& b)
+	BigInteger operator+=(const BigInteger &b)
 	{
 		*this = (*this + b);
 		return *this;
 	}
-	BigInteger operator-=(const BigInteger& b)
+	BigInteger operator-=(const BigInteger &b)
 	{
 		*this = (*this - b);
 		return *this;
 	}
-	BigInteger operator++( int ) // ÖØÔØ×ÔÔö
+	BigInteger operator++(int) // é‡è½½è‡ªå¢
 	{
 		*this += 1;
 		return *this;
 	}
-	BigInteger operator%(const BigInteger& b)
+	BigInteger operator%(const BigInteger &b)
 	{
 		BigInteger temp;
 		temp = *this;
 		while (true)
 		{
-			if (temp < b) // Èç¹ûtemp±ÈbĞ¡£¬ËµÃ÷¿ÉÒÔÁË
+			if (temp < b) // å¦‚æœtempæ¯”bå°ï¼Œè¯´æ˜å¯ä»¥äº†
 				return temp;
-			temp -= b; // ¼õÈ¥n¸öb
+			temp -= b; // å‡å»nä¸ªb
 		}
-		assert(true); // ²»Ó¦¸Ãµ½ÕâÀ´£¬ÓĞ¿ÉÄÜÊÇÒòÎªÊÇ¸ºÊı
+		assert(true); // ä¸åº”è¯¥åˆ°è¿™æ¥ï¼Œæœ‰å¯èƒ½æ˜¯å› ä¸ºæ˜¯è´Ÿæ•°
 	}
 };

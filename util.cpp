@@ -1,13 +1,13 @@
 #include "util.h"
 
-void gotoxy(int x, int y) //¸Ãº¯Êı¿ÉÉèÖÃ¹â±êµ½ÈÎÒâ×ø±ê
+void gotoxy(int x, int y) //è¯¥å‡½æ•°å¯è®¾ç½®å…‰æ ‡åˆ°ä»»æ„åæ ‡
 {
-	COORD p = { x,y };
+	COORD p = {x, y};
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(h, p);
 }
 
-void getxy(int* x, int* y) //¸Ãº¯Êı»ñÈ¡µ±Ç°¿ØÖÆÌ¨¹â±êÎ»ÖÃ
+void getxy(int *x, int *y) //è¯¥å‡½æ•°è·å–å½“å‰æ§åˆ¶å°å…‰æ ‡ä½ç½®
 {
 	CONSOLE_SCREEN_BUFFER_INFO c;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
