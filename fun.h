@@ -4,7 +4,7 @@
 using namespace std;
 
 const int MAX_STACK = 5000;		   // 定义最大堆栈能承受层数（与visual studio配置有关）
-const int FLOOR_LENGTH_LIMMIT = 8; // 定义一般算法接受的最大整数位数
+const int FLOOR_LENGTH_LIMMIT = 5; // 定义一般算法接受的最大整数位数（因内存限制过大直接采用非递归算法）
 
 static vector<BigInteger> memory; // 负责保存中间结果以供其他时间使用
 

@@ -125,8 +125,6 @@ void Initialize()
 		cout << "输入错误！请重新输入！ A/B/C\n";
 		cin >> choice;
 	}
-	while (getchar() != '\n')
-		; // 清除空格
 
 	/***************** 测试模式 ******************/
 	if (choice == "C") // 如果选择测试模式，自动运算、自动计时、无需输入
@@ -170,9 +168,6 @@ void TestMode()
 		cout << setiosflags(ios::left) << setiosflags(ios::scientific) << setw(14) << max_floor << resetiosflags(ios::left) << resetiosflags(ios::scientific) << setiosflags(ios::fixed) << setprecision(0)
 			 << setiosflags(ios::right) << setw(9) << (double)(end1 - start1) * 1000 / CLOCKS_PER_SEC << "ms" << setw(10) << (double)(end2 - start2) * 1000 / CLOCKS_PER_SEC << "ms"
 			 << resetiosflags(ios::right) << endl;
-		cin.sync();
-		cin.clear();
-		cin.ignore();
 		cout << "输入n退出，回车键继续" << endl;
 		char ch;
 		ch = getch();
@@ -237,7 +232,7 @@ void Calculate(string choice)
 				fflush(stdin);
 				cin.clear();
 				cin.ignore(INT_MAX, '\n');
-				cout << "请输入正确的层数！！\n";
+				cout << "请输入正确的层数(正整数)！！\n";
 				cin >> temp;
 			}
 		}
@@ -245,7 +240,7 @@ void Calculate(string choice)
 		/***************** 仅为超长整数的提供算法 ******************/
 		if (temp.length() > FLOOR_LENGTH_LIMMIT) // 如果超过8位，只能用非递归算法
 		{
-			cout << "数太大了，让我算算" << endl;
+			cout << "数太大了，让我算算 \n 注意：本次运算使用非递归算法" << endl;
 			BigInteger longinput;
 			longinput = temp;
 			start1 = clock();

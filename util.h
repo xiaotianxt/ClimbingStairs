@@ -26,6 +26,11 @@ public:
 	static const int width = 8;		   // 元素的宽度，与base对应
 	vector<int> s;					   // 储存大整数
 
+	bool IsEven() // 返回是否是偶数
+	{
+		return !(s[0] % 2);
+	}
+
 	BigInteger(long long num = 0) { *this = num; } //构造函数，对于longlong类型的整数可以直接构造
 
 	BigInteger operator=(long long num) // 重载=号（注意这里只接受最大long long类型的整数）
