@@ -1,4 +1,4 @@
-#include "fun.h"
+﻿#include "fun.h"
 
 BigInteger RecursionStart(int &floor)
 {
@@ -147,9 +147,7 @@ void TestMode()
 		 << setiosflags(ios::right) << setw(9) << "递归" << setw(12) << "非递归"
 		 << resetiosflags(ios::right) << endl;
 	cout << "------------------------------------" << endl;
-	for (int i = 0; i < 5; ++i)
-	{
-	}
+
 	MemoryReset();
 	assert(memory.size() == 2);		   // 此时记忆应当清空，仅存在初始条件0,1
 	int max_floor = 100, x = 0, y = 0; // x, y 用于设置控制台光标
@@ -175,7 +173,7 @@ void TestMode()
 		cin.sync();
 		cin.clear();
 		cin.ignore();
-		cout << "输入n退出，任意键继续" << endl;
+		cout << "输入n退出，回车键继续" << endl;
 		char ch;
 		ch = getch();
 		if (ch == 'n')
@@ -201,7 +199,14 @@ void Calculate(string choice)
 
 	if (file == 'y')
 	{
+		cout << "\n正在打开文件.....\n"
+			 << endl;
 		fin.open("floors.txt");
+	}
+	else
+	{
+		cout << "\n 不打开文件 \n"
+			 << endl;
 	}
 	clock_t start1, end1;
 	string temp;

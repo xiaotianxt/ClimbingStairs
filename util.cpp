@@ -1,4 +1,4 @@
-#include "util.h"
+﻿#include "util.h"
 
 void gotoxy(int x, int y) //该函数可设置光标到任意坐标
 {
