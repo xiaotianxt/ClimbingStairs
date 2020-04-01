@@ -1,16 +1,13 @@
 ﻿  fun.cpp
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\fun.cpp(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\fun.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(49,7): warning C4101: “x”: 未引用的局部变量
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(85,20): warning C4018: “>=”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(85,37): warning C4018: “>=”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(88,10): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(90,10): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(106,21): warning C4018: “>=”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(114,11): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(116,11): warning C4018: “<”: 有符号/无符号不匹配
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(122,13): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(54,7): warning C4101: “x”: 未引用的局部变量
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(90,20): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(90,37): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(93,10): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(95,10): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(111,21): warning C4018: “>=”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(119,11): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(121,11): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\util.h(127,13): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\fun.cpp(74,21): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\fun.cpp(83,21): warning C4018: “<”: 有符号/无符号不匹配
 C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\fun.cpp(103,25): warning C4018: “>”: 有符号/无符号不匹配
