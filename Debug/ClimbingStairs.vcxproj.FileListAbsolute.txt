@@ -1,2 +1,0 @@
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\Debug\ClimbingStairs.exe
-C:\Users\Andy Tian\Desktop\Programming\ClimbingStairs\Debug\ClimbingStairs.pdb
